@@ -1,0 +1,25 @@
+1) С помощью Django ORM  выбрать всех игроков, в email которых находится в
+домене “by”.
+
+from base.models import Player
+Player.objects.all().filter(email__icontains='by')
+
+[<Player: Vasya vasya@tut.by>, <Player: Lesha lesha@tut.by>]
+
+2) С помощью Django ORM найти количество уникальных кодов валют в базе.
+
+from base.models import Money
+Money.objects.values('currency_id').distinct().count()
+2
+
+3) Используя Django ORM найти среднее количество денег у всех игроков с
+группировкой по currency_id. Можно использовать сырые SQL запросы.
+
+Money.objects.values('currency_id').annotate(total=Avg('amount'))
+Money.objects.values('currency_id').order_by('currency_id').annotate(total=Avg('amount'))
+
+SELECT `money`.`currency_id`, AVG(`money`.`amount`) AS `total` FROM `money` GROUP BY `money`.`currency_id` ORDER BY `money`
+.`currency_id` ASC LIMIT 21; args=()
+
+
+[{'currency_id': u'BYN', 'total': 300.0}, {'currency_id': u'dead_crystals', 'total': 860.0}]
