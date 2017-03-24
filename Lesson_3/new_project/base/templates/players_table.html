@@ -1,0 +1,19 @@
+<html>
+        <body>
+        <table border="1">
+            {% for player in player_list %}
+                <tr>
+                    {% if forloop.counter|divisibleby:2 %}
+                        <td><b>Name: {{ player.name }}</b></td>
+                    {% else %}
+                        <td>Name: {{ player.name}}</td>
+                    {% endif %}
+
+                        <td>Created: {{ player.created|date:"M/d/y - h:m:s"|lower}}</td>
+                        <td>Updated: {{ player.updated|date:"M/d/y - h:m:s"|lower}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <!-- https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#for -->
+    </body>
+</html>

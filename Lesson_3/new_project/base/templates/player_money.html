@@ -1,0 +1,30 @@
+<html>
+        <body>
+        <table border="1">
+            <!--{% load mytags %}-->
+            <!--<tr class="{% cycle 'row1' 'row2' %}"></td>-->
+            <!--<tr class="{% cycle rowvalue1 rowvalue2 %}"-->
+            <!--<tr class="{% autoescape off %}{% cycle rowvalue1 rowvalue2 %}{% endautoescape %}">-->
+            <!--{% if "bc" in "abcdef" %}-->
+            <!--This appears since "bc" is a substring of "abcdef"-->
+            <!--{% endif %}-->
+
+
+       {% for money in player_id %}
+            <tr class="{% autoescape off %}{% cycle rowvalue1 rowvalue2 %}{% endautoescape %}"></tr>
+
+            {% if forloop.first %}
+                <td>BYN</td><td>{{money.amount}}</td>
+
+            {% elif forloop.last %}
+                <td>dead_crystals</td><td>{{ money.amount}}</td>
+
+            {% else %}
+                <li>Sorry, the player has no money.</li>
+            {% endif %}
+       {% endfor %}
+
+        </table>
+        <!-- https://docs.djangoproject.com/en/1.8/ref/templates/builtins/#for -->
+    </body>
+</html>
